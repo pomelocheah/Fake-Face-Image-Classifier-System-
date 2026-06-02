@@ -1,7 +1,3 @@
-# Fake-Face-Image-Classifier-System
-
-
-
 # Fake vs Real Image Classification Project
 
 ## 📌 Project Overview
@@ -92,9 +88,21 @@ This will automatically install all required libraries for the project.
 
 ---
 
-## 🚀 How to Run the Project
+## 4️⃣ Download the Dataset
 
+This project uses the **Fake vs Real Faces (Hard)** dataset from Kaggle.
 
+Dataset link:  
+https://www.kaggle.com/datasets/hamzaboulahia/hardfakevsrealfaces
+
+---
+
+### 📥 Steps to Download
+
+1. Open the dataset link above  
+2. Click **Download** (you may need to log in to Kaggle)  
+3. Extract the zip file after downloading  
+4. Place the dataset into the project folder which is name 'data'
 
 ## 🧠 Workflow Summary
 
