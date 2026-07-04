@@ -1,2 +1,6 @@
-Pillow==12.2.0
-scikit_learn==1.9.0
+tensorflow==2.20      # 内置keras数据增强（你现在用的这套）
+matplotlib            # 可视化aug样本
+pillow                # 图像读写
+scikit-learn==1.5.2   # 评估指标
+gradio                # 网页部署
+numpy
