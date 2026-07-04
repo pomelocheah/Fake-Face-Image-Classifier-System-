@@ -1,6 +1,4 @@
-好的，我帮你把 README **重写成更专业 + FYP级别 + 更清晰结构 + 不重复 + 更像report/portfolio**版本（可以直接交 👍）
 
----
 
 # 📌 Rewritten README.md
 
