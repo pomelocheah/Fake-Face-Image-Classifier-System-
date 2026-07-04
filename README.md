@@ -1,120 +1,244 @@
-# Fake-Face-Image-Classifier-System README.md
+好的，我帮你把 README **重写成更专业 + FYP级别 + 更清晰结构 + 不重复 + 更像report/portfolio**版本（可以直接交 👍）
+
+---
+
+# 📌 Rewritten README.md
+
 ```markdown
-# Fake Face Image Classifier System
-A binary deep learning classification project to distinguish real human facial photographs from AI-generated fake faces, implemented with custom CNN baseline and MobileNetV2 transfer learning models.
+# Fake Face Image Classification System
 
-## Project Overview
-This system builds two convolutional neural network models to identify visual differences between authentic real faces and synthetic AI fake faces.
-1. Lightweight scratch-trained custom CNN as the baseline benchmark
-2. Improved MobileNetV2 transfer learning model pre-trained on ImageNet for higher classification accuracy
-All codes support dataset splitting, image augmentation, model training, evaluation and result visualisation (confusion matrix, classification metrics).
+A deep learning-based binary image classification system designed to distinguish between real human facial images and AI-generated fake faces using both a custom CNN baseline model and a MobileNetV2 transfer learning approach.
 
-## Repository File Structure
+---
+
+## 📌 Project Overview
+
+This project implements and evaluates two convolutional neural network architectures for fake face detection:
+
+- **Baseline Model:** A custom-built CNN trained from scratch
+- **Improved Model:** MobileNetV2 with ImageNet pre-trained weights (transfer learning)
+
+The system includes a complete machine learning pipeline covering:
+- Dataset preprocessing and splitting
+- Data augmentation strategies
+- Model training and optimization
+- Performance evaluation (confusion matrix + metrics)
+- Model comparison analysis
+
+---
+
+## 📁 Project Structure
+
 ```
-Fake-Face-Image-Classifier-SYSTEM/
-├── data_split/               # Split dataset folders (train / val / test)
+
+Fake-Face-Image-Classifier-System/
+├── data_split/                  # Dataset splits (train / val / test)
 │   ├── train/
 │   ├── val/
 │   └── test/
-├── models/                    # Saved trained model weights (.keras format)
-│   ├── A_CNN_baseline.keras   # Custom scratch CNN baseline model
-│   └── B_MobileNet_baseline.keras # Improved MobileNetV2 transfer learning model
-├── notebooks/                 # Jupyter notebooks for data preprocessing experiments
-│   ├── data_aug.ipynb         # Data augmentation trial notebook
-│   └── data_cleaning.ipynb    # Dataset cleaning and quality check notebook
-├── src/                       # Core source code scripts
-│   ├── check_images.py         # Script to verify image file integrity
-│   ├── data_augmentation.py    # Implement random image augmentation pipeline
-│   ├── dataset_analysis.py     # Dataset distribution and sample visual analysis
-│   ├── evaluation.py           # Model evaluation: confusion matrix, precision/recall/F1/accuracy calculation
-│   ├── split_data.py           # Automatically split raw dataset into train/validation/test sets
-│   ├── model.py                # Define custom CNN and MobileNetV2 model architectures
-│   └── train.py                # Main training script for both baseline and improved model
-├── venv312/                    # Local Python 3.12 virtual environment (ignored by git)
-├── .gitignore                  # Git ignore file for environment, large datasets and cache
-├── README.md                   # Project documentation
-└── requirements.txt            # All Python library dependencies
+│       ├── real/
+│       └── fake/
+│
+├── models/                      # Saved trained models
+│   ├── A_CNN_baseline.keras
+│   ├── B_MobileNet_baseline.keras
+│   └── C_MobileNet_improved.keras
+│
+├── notebooks/                   # Experimental notebooks
+│   ├── data_aug.ipynb
+│   └── data_cleaning.ipynb
+│
+├── src/                         # Core source code
+│   ├── check_images.py
+│   ├── data_augmentation.py
+│   ├── dataset_analysis.py
+│   ├── evaluation.py
+│   ├── split_data.py
+│   ├── model.py
+│   └── train.py
+│
+├── venv/                        # Virtual environment (excluded from git)
+├── requirements.txt
+└── README.md
+
 ```
 
-## Dataset Notice
-The full raw dataset is excluded from this repository due to large file size limits.
-This project uses the **Hard Fake vs Real Faces** public dataset from Kaggle, which contains balanced real and AI-generated fake facial samples for binary classification.
-Kaggle Dataset Link: https://www.kaggle.com/datasets/hamzaboulahia/hardfakevsrealfaces
+---
 
-### Dataset Folder Setup
-1. Download the dataset zip file from Kaggle
-2. Extract all images and organise into `data_split/train`, `data_split/val`, `data_split/test` folders
-3. Each split subfolder contains two subdirectories: `real` and `fake` for two label classes
-Or run `src/split_data.py` to auto-split full raw dataset into standard train/val/test partitions.
+## 📊 Dataset
 
-## Environment & Setup Guide
+This project uses the **Hard Fake vs Real Faces Dataset** from Kaggle:
+
+🔗 https://www.kaggle.com/datasets/hamzaboulahia/hardfakevsrealfaces
+
+### Dataset Preparation
+
+1. Download dataset from Kaggle
+2. Organize into the following structure:
+
+```
+
+data_split/
+├── train/
+├── val/
+└── test/
+├── real/
+└── fake/
+
+````
+
+Alternatively, use `src/split_data.py` to automatically generate the splits.
+
+---
+
+## ⚙️ Environment Setup
+
 ### 1. Clone Repository
 ```bash
 git clone https://github.com/pomelocheah/Fake-Face-Image-Classifier-System.git
-cd Fake-Face-Image-Classifier-SYSTEM
+cd Fake-Face-Image-Classifier-System
+````
+
+### 2. Create Virtual Environment
+
+```bash
+python -m venv venv
 ```
 
-### 2. Create Python Virtual Environment
+Activate:
+
+* macOS/Linux:
+
 ```bash
-# Create virtual environment (Python 3.12 recommended)
-python -m venv venv312
+source venv/bin/activate
 ```
-#### Activate Environment
-- MacOS / Linux
+
+* Windows:
+
 ```bash
-source venv312/bin/activate
-```
-- Windows Command Prompt
-```cmd
-venv312\Scripts\activate
+venv\Scripts\activate
 ```
 
 ### 3. Install Dependencies
-All required libraries are listed in `requirements.txt`
+
 ```bash
 pip install -r requirements.txt
 ```
 
-## Core Dependencies
-```
-Python == 3.12
-tensorflow == 2.20.0
-Pillow == 12.2.0
-scikit-learn == 1.9.0
-numpy
-matplotlib
-```
+---
 
-## Full Project Workflow
-1. **Data Preparation & Split**
-   Run `src/split_data.py` to separate raw dataset into training, validation and test subsets with fixed random seed for reproducibility.
+## 🧠 Model Architectures
+
+### 🔹 Baseline Model (Custom CNN)
+
+A lightweight convolutional neural network trained from scratch.
+
+* Designed for feature extraction from facial images
+* Uses convolution + pooling layers for spatial feature learning
+* Fully connected layers for binary classification
+
+---
+
+### 🔹 Improved Model (MobileNetV2)
+
+A transfer learning model using pretrained ImageNet weights.
+
+* MobileNetV2 backbone (frozen layers)
+* Global Average Pooling for feature compression
+* Dense classification head for binary output
+
+---
+
+## 🧪 Data Augmentation
+
+Applied only on training data to improve generalization.
+
+### Baseline Augmentation
+
+* Horizontal flip
+* Small rotation
+* Slight zoom
+
+### Improved Augmentation
+
+* Stronger rotation
+* Zoom variation
+* Contrast adjustment
+* Brightness adjustment
+
+---
+
+## 🚀 Workflow
+
+1. **Dataset Preparation**
+
+   * Split dataset into train/val/test
+
 2. **Data Augmentation**
-   Use `src/data_augmentation.py` to add random horizontal flip, rotation, zoom and brightness adjustment on training images to reduce model overfitting.
-3. **Model Definition**
-   Two model architectures are defined in `src/model.py`:
-   - Baseline: Custom lightweight CNN built from scratch without pre-trained weights
-   - Improved Model: MobileNetV2 transfer learning with frozen ImageNet pre-trained backbone
-4. **Model Training**
-   Execute `src/train.py` to train either baseline CNN or MobileNetV2 model; trained weights will auto-save into `/models` folder.
-5. **Model Evaluation**
-   Run `src/evaluation.py` on saved `.keras` models to output full classification metrics (Accuracy, Precision, Recall, F1-Score) and generate visual confusion matrix plots for test set performance analysis.
 
-## Model Performance Summary
-1. Baseline Custom CNN
-   - Test Accuracy: 95.88%
-   - Weighted Precision: 95.88%
-   - Weighted Recall: 95.88%
-   - Weighted F1-Score: 95.88%
-   Limitation: Shallow layers cannot capture subtle artificial texture defects on fake faces, resulting in minor misclassification.
+   * Apply augmentation only on training set
 
-2. Improved MobileNetV2 Transfer Learning Model
-   - Test Accuracy: 98.97%
-   - Weighted Precision: 98.99%
-   - Weighted Recall: 98.97%
-   - Weighted F1-Score: 98.97%
-   Advantage: Pre-trained ImageNet weights provide strong universal feature extraction ability, significantly reducing false predictions for both real and fake face categories.
+3. **Model Training**
 
-## Author
-Multimedia Computing AI System Student, Multimedia University (MMU)
-```
-```
+   * Train CNN baseline model
+   * Train MobileNetV2 models
+
+4. **Evaluation**
+
+   * Compute accuracy, precision, recall, F1-score
+   * Generate confusion matrix
+
+5. **Comparison**
+
+   * Compare baseline vs transfer learning performance
+
+---
+
+## 📈 Model Performance
+
+### 🔹 Baseline CNN
+
+* Accuracy: 95.88%
+* Precision: 95.88%
+* Recall: 95.88%
+* F1-score: 95.88%
+
+**Observation:** Performs well but limited in capturing fine-grained facial artifacts.
+
+---
+
+### 🔹 MobileNetV2 (Improved)
+
+* Accuracy: 98.97%
+* Precision: 98.99%
+* Recall: 98.97%
+* F1-score: 98.97%
+
+**Observation:** Transfer learning significantly improves feature extraction and reduces misclassification.
+
+---
+
+## 📊 Evaluation Output
+
+The system generates:
+
+* Confusion Matrix
+* Classification Report (Precision / Recall / F1-score)
+* Training Accuracy/Loss Curves
+
+---
+
+## 👨‍💻 Author
+
+Multimedia Computing AI Student
+Multimedia University (MMU)
+
+---
+
+## 📌 Notes
+
+* Dataset is not included due to size limitations
+* Models are trained locally using TensorFlow 2.20
+* Designed for educational and academic research purposes
+
+
