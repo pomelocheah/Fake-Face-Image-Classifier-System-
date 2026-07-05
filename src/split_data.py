@@ -3,7 +3,7 @@ import shutil
 from sklearn.model_selection import train_test_split
 
 
-data_dir = "data/archive-2"
+data_dir = "data_split"
 
 real_dir = os.path.join(data_dir, "real")
 fake_dir = os.path.join(data_dir, "fake")

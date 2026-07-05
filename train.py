@@ -2,9 +2,13 @@ import tensorflow as tf
 from model import build_cnn, build_mobilenet
 from src.data_augmentation import load_dataset
 import os
+import mlflow
+import mlflow.tensorflow
 
 os.makedirs("models", exist_ok=True)
 
+mlflow.set_experiment("Fake_Real_Face_Classification")
+mlflow.tensorflow.autolog()
 
 # ==========================
 # TRAIN FUNCTION
@@ -16,6 +20,13 @@ def train_model(model_name, model, aug_mode):
     print("==============================\n")
 
     train_ds, val_ds, test_ds = load_dataset(aug_mode=aug_mode)
+    
+    with mlflow.start_run(run_name=model_name):
+        # 手动记录实验超参
+        mlflow.log_param("augmentation_mode", aug_mode)
+        mlflow.log_param("epochs", 10)
+        mlflow.log_param("batch_size", 16)
+        mlflow.log_param("input_image_size", "224×224")
 
     history = model.fit(
         train_ds,
@@ -27,12 +38,18 @@ def train_model(model_name, model, aug_mode):
 
     test_loss, test_acc = model.evaluate(test_ds)
 
+    # 记录测试结果
+    with mlflow.start_run(run_name=model_name):
+        mlflow.log_metric("test_loss", test_loss)
+        mlflow.log_metric("test_accuracy", test_acc)
+
     print("\n===== TEST RESULT =====")
     print(model_name)
     print("Loss:", test_loss)
     print("Accuracy:", test_acc)
 
     model.save(f"models/{model_name}.keras")
+    mlflow.log_artifact(f"models/{model_name}.keras", artifact_path="saved_model")
 
 
 # ==========================
@@ -45,7 +62,9 @@ if __name__ == "__main__":
     # A: CNN + baseline
     cnn_model = build_cnn()
     train_model("A_CNN_baseline", cnn_model, "baseline")
+    mlflow.end_run()
 
     # B: MobileNet + baseline
     mobilenet_b = build_mobilenet()
     train_model("B_MobileNet_baseline", mobilenet_b, "baseline")
+    mlflow.end_run()

@@ -6,3 +6,4 @@ gradio                # 网页部署
 numpy
 torch == 2.2.0
 torchvision == 0.27.1
+mlflow

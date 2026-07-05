@@ -1,6 +1,6 @@
 
 
-# 📌 Rewritten README.md
+# 📌 README.md
 
 ```markdown
 # Fake Face Image Classification System
