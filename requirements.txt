@@ -4,3 +4,5 @@ pillow                # 图像读写
 scikit-learn==1.5.2   # 评估指标
 gradio                # 网页部署
 numpy
+torch == 2.2.0
+torchvision == 0.27.1

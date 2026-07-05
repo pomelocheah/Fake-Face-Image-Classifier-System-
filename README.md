@@ -25,39 +25,45 @@ The system includes a complete machine learning pipeline covering:
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
-```
-
+```text
 Fake-Face-Image-Classifier-System/
-├── data_split/                  # Dataset splits (train / val / test)
-│   ├── train/
-│   ├── val/
-│   └── test/
-│       ├── real/
-│       └── fake/
 │
-├── models/                      # Saved trained models
+├── app.py                         # Gradio web application
+├── model.py                       # CNN and MobileNetV2 model definitions
+├── requirements.txt               # Project dependencies
+├── README.md                      # Project documentation
+│
+├── data_split/                    # Dataset
+│   ├── train/
+│   │   ├── fake/
+│   │   └── real/
+│   ├── val/
+│   │   ├── fake/
+│   │   └── real/
+│   └── test/
+│       ├── fake/
+│       └── real/
+│
+├── models/                        # Trained models
 │   ├── A_CNN_baseline.keras
 │   ├── B_MobileNet_baseline.keras
-│   └── C_MobileNet_improved.keras
+│  
 │
-├── notebooks/                   # Experimental notebooks
+├── notebooks/                     # Jupyter notebooks
 │   ├── data_aug.ipynb
 │   └── data_cleaning.ipynb
 │
-├── src/                         # Core source code
-│   ├── check_images.py
-│   ├── data_augmentation.py
-│   ├── dataset_analysis.py
-│   ├── evaluation.py
-│   ├── split_data.py
-│   ├── model.py
-│   └── train.py
+├── src/                           # Source code
+│   ├── check_images.py            # Verify image integrity
+│   ├── data_augmentation.py       # Data preprocessing & augmentation
+│   ├── dataset_analysis.py        # Dataset visualization and statistics
+│   ├── evaluation.py              # Performance evaluation
+│   ├── split_data.py              # Dataset splitting
+│   ├── validation.py              # Model validation
+│   └── train.py                   # Model training
 │
-├── venv/                        # Virtual environment (excluded from git)
-├── requirements.txt
-└── README.md
 
 ```
 
