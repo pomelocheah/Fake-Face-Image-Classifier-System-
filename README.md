@@ -1,129 +1,76 @@
-
-
-# 📌 README.md
-
-```markdown
 # Fake Face Image Classification System
 
-A deep learning-based binary image classification system designed to distinguish between real human facial images and AI-generated fake faces using both a custom CNN baseline model and a MobileNetV2 transfer learning approach.
+A deep learning-based binary image classification system for distinguishing between **real human faces** and **AI-generated fake faces** using a custom CNN baseline model and a MobileNetV2 transfer learning model.
 
 ---
 
-## 📌 Project Overview
+# Project Title
 
-This project implements and evaluates two convolutional neural network architectures for fake face detection:
-
-- **Baseline Model:** A custom-built CNN trained from scratch
-- **Improved Model:** MobileNetV2 with ImageNet pre-trained weights (transfer learning)
-
-The system includes a complete machine learning pipeline covering:
-- Dataset preprocessing and splitting
-- Data augmentation strategies
-- Model training and optimization
-- Performance evaluation (confusion matrix + metrics)
-- Model comparison analysis
+**Fake Face Image Classification System**
 
 ---
 
-## Project Structure
+# Group Members
+
+| Name | Student ID |
+|------|------------|
+| Cheah Xiao You| 252UA254PY |
+
+---
+
+# Dataset Source
+
+**Hard Fake vs Real Faces Dataset (Kaggle)**
+
+https://www.kaggle.com/datasets/hamzaboulahia/hardfakevsrealfaces
+
+Download the dataset and organize it as follows:
 
 ```text
-Fake-Face-Image-Classifier-System/
-│
-├── app.py                         # Gradio web application
-├── model.py                       # CNN and MobileNetV2 model definitions
-├── requirements.txt               # Project dependencies
-├── README.md                      # Project documentation
-│
-├── data_split/                    # Dataset
-│   ├── train/
-│   │   ├── fake/
-│   │   └── real/
-│   ├── val/
-│   │   ├── fake/
-│   │   └── real/
-│   └── test/
-│       ├── fake/
-│       └── real/
-│
-├── models/                        # Trained models
-│   ├── A_CNN_baseline.keras
-│   ├── B_MobileNet_baseline.keras
-│  
-│
-├── notebooks/                     # Jupyter notebooks
-│   ├── data_aug.ipynb
-│   └── data_cleaning.ipynb
-│
-├── src/                           # Source code
-│   ├── check_images.py            # Verify image integrity
-│   ├── data_augmentation.py       # Data preprocessing & augmentation
-│   ├── dataset_analysis.py        # Dataset visualization and statistics
-│   ├── evaluation.py              # Performance evaluation
-│   ├── split_data.py              # Dataset splitting
-│   ├── validation.py              # Model validation
-│   └── train.py                   # Model training
-│
-
-```
-
----
-
-## 📊 Dataset
-
-This project uses the **Hard Fake vs Real Faces Dataset** from Kaggle:
-
-🔗 https://www.kaggle.com/datasets/hamzaboulahia/hardfakevsrealfaces
-
-### Dataset Preparation
-
-1. Download dataset from Kaggle
-2. Organize into the following structure:
-
-```
-
 data_split/
 ├── train/
+│   ├── fake/
+│   └── real/
 ├── val/
+│   ├── fake/
+│   └── real/
 └── test/
-├── real/
-└── fake/
-
-````
-
-Alternatively, use `src/split_data.py` to automatically generate the splits.
+    ├── fake/
+    └── real/
+```
 
 ---
 
-## ⚙️ Environment Setup
+# Setup Instructions
 
-### 1. Clone Repository
+Clone the repository:
+
 ```bash
 git clone https://github.com/pomelocheah/Fake-Face-Image-Classifier-System.git
 cd Fake-Face-Image-Classifier-System
-````
+```
 
-### 2. Create Virtual Environment
+Create a virtual environment:
 
 ```bash
 python -m venv venv
 ```
 
-Activate:
+Activate the environment:
 
-* macOS/Linux:
+**macOS / Linux**
 
 ```bash
 source venv/bin/activate
 ```
 
-* Windows:
+**Windows**
 
 ```bash
 venv\Scripts\activate
 ```
 
-### 3. Install Dependencies
+Install the required packages:
 
 ```bash
 pip install -r requirements.txt
@@ -131,118 +78,93 @@ pip install -r requirements.txt
 
 ---
 
-## 🧠 Model Architectures
+# How to Train the Model
 
-### 🔹 Baseline Model (Custom CNN)
+Run:
 
-A lightweight convolutional neural network trained from scratch.
+```bash
+python src/train.py
+```
 
-* Designed for feature extraction from facial images
-* Uses convolution + pooling layers for spatial feature learning
-* Fully connected layers for binary classification
-
----
-
-### 🔹 Improved Model (MobileNetV2)
-
-A transfer learning model using pretrained ImageNet weights.
-
-* MobileNetV2 backbone (frozen layers)
-* Global Average Pooling for feature compression
-* Dense classification head for binary output
+The trained models will be saved in the **models/** folder.
 
 ---
 
-## 🧪 Data Augmentation
+# How to Evaluate the Model
 
-Applied only on training data to improve generalization.
+Run:
 
-### Baseline Augmentation
+```bash
+python src/evaluation.py
+```
 
-* Horizontal flip
-* Small rotation
-* Slight zoom
+The evaluation script reports:
 
-### Improved Augmentation
-
-* Stronger rotation
-* Zoom variation
-* Contrast adjustment
-* Brightness adjustment
-
----
-
-## 🚀 Workflow
-
-1. **Dataset Preparation**
-
-   * Split dataset into train/val/test
-
-2. **Data Augmentation**
-
-   * Apply augmentation only on training set
-
-3. **Model Training**
-
-   * Train CNN baseline model
-   * Train MobileNetV2 models
-
-4. **Evaluation**
-
-   * Compute accuracy, precision, recall, F1-score
-   * Generate confusion matrix
-
-5. **Comparison**
-
-   * Compare baseline vs transfer learning performance
+- Accuracy
+- Precision
+- Recall
+- F1-score
+- Confusion Matrix
 
 ---
 
-## 📈 Model Performance
+# How to Run Prediction App
 
-### 🔹 Baseline CNN
+Run:
 
-* Accuracy: 95.88%
-* Precision: 95.88%
-* Recall: 95.88%
-* F1-score: 95.88%
+```bash
+python app.py
+```
 
-**Observation:** Performs well but limited in capturing fine-grained facial artifacts.
+After launching, open the Gradio URL shown in the terminal (for example: http://127.0.0.1:7860).
 
----
-
-### 🔹 MobileNetV2 (Improved)
-
-* Accuracy: 98.97%
-* Precision: 98.99%
-* Recall: 98.97%
-* F1-score: 98.97%
-
-**Observation:** Transfer learning significantly improves feature extraction and reduces misclassification.
+Upload an image to predict whether it is **Real** or **Fake**.
 
 ---
 
-## 📊 Evaluation Output
+# Example Prediction Output
 
-The system generates:
+```
+Prediction : Fake Face
+Confidence : 98.97%
+```
 
-* Confusion Matrix
-* Classification Report (Precision / Recall / F1-score)
-* Training Accuracy/Loss Curves
+or
+
+```
+Prediction : Real Face
+Confidence : 99.21%
+```
 
 ---
 
-## 👨‍💻 Author
+# Best Result Summary
 
-Multimedia Computing AI Student
-Multimedia University (MMU)
+| Model | Accuracy | Precision | Recall | F1-score |
+|-------|----------|-----------|--------|----------|
+| CNN Baseline | 54.12% | 29.29% | 54.12% | 38.00% |
+| MobileNetV2 | 98.97% | 98.97% | 98.97% | 98.97% |
 
 ---
 
-## 📌 Notes
+# Known Limitations
 
-* Dataset is not included due to size limitations
-* Models are trained locally using TensorFlow 2.20
-* Designed for educational and academic research purposes
+- The model was trained using a single public dataset.
+- Performance may decrease on unseen datasets with different image distributions.
+- Only binary classification (Real vs. Fake) is supported.
+- The prediction confidence should not be treated as definitive proof of image authenticity.
 
+---
 
+# References
+
+1. Sandler, M., Howard, A., Zhu, M., Zhmoginov, A., & Chen, L. (2018). *MobileNetV2: Inverted Residuals and Linear Bottlenecks*. CVPR.
+
+2. TensorFlow Documentation  
+https://www.tensorflow.org/
+
+3. Keras Documentation  
+https://keras.io/
+
+4. Hard Fake vs Real Faces Dataset (Kaggle)  
+https://www.kaggle.com/datasets/hamzaboulahia/hardfakevsrealfaces
