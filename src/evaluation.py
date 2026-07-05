@@ -76,6 +76,6 @@ if __name__ == "__main__":
     # 1. 加载测试集
     _, _, test_ds = load_dataset(aug_mode="baseline")
     # 2. 加载你训练好的模型，修改路径为你的模型文件
-    model = load_model("../models/B_MobileNet_baseline.keras")
+    model = load_model("models/A_CNN_baseline.keras")
     # 3. 执行评估
-    acc, prec, rec, f1score = evaluate_model(model, test_ds, model_name="MobileNet Baseline")
+    acc, prec, rec, f1score = evaluate_model(model, test_ds, model_name="Baseline CNN")
