@@ -4,6 +4,7 @@ from src.data_augmentation import load_dataset
 import os
 import mlflow
 import mlflow.tensorflow
+from config import EPOCHS, IMAGE_SIZE, BATCH_SIZE
 
 os.makedirs("models", exist_ok=True)
 
@@ -24,9 +25,9 @@ def train_model(model_name, model, aug_mode):
     with mlflow.start_run(run_name=model_name):
         # 手动记录实验超参
         mlflow.log_param("augmentation_mode", aug_mode)
-        mlflow.log_param("epochs", 10)
-        mlflow.log_param("batch_size", 16)
-        mlflow.log_param("input_image_size", "224×224")
+        mlflow.log_param("epochs", EPOCHS)
+        mlflow.log_param("batch_size", BATCH_SIZE)
+        mlflow.log_param("input_image_size", f"{IMAGE_SIZE[0]}×{IMAGE_SIZE[1]}")
 
     history = model.fit(
         train_ds,

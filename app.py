@@ -3,6 +3,7 @@ from PIL import Image
 import numpy as np
 import tensorflow as tf
 import mlflow.tensorflow
+from config import IMAGE_SIZE, BATCH_SIZE
 
 # -------------------------- Model Loading Logic (MLflow Registry) --------------------------
 def load_model():
@@ -26,7 +27,7 @@ def predict_image(input_img: Image.Image):
         return "Please upload a face image", None
 
     img = input_img.convert("RGB")
-    img = img.resize((224, 224))
+    img = img.resize(IMAGE_SIZE)
     img_array = np.array(img)
     # MobileNetV2 official preprocessing
     from tensorflow.keras.applications.mobilenet_v2 import preprocess_input
